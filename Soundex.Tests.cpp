@@ -16,6 +16,6 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
  //AAA
   char soundex[5];
-  generateSoundex("BABBg2@", soundex);
-  ASSERT_STREQ(soundex,"B120");
+  generateSoundex("Emmb3$", soundex);
+  ASSERT_STREQ(soundex,"E510");
 }
