@@ -13,4 +13,9 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_2) {
   generateSoundex("CABBg2%", soundex);
   ASSERT_STREQ(soundex,"C120");
 }
-
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
+ //AAA
+  char soundex[5];
+  generateSoundex("Emmb3$", soundex);
+  ASSERT_STREQ(soundex,"E510");
+}
