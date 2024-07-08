@@ -1,40 +1,66 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
-#include "Soundex.h"
 #include <ctype.h>
 #include <string.h>
 
+// Function to get Soundex code for a given character
 char getSoundexCode(char c) {
-    c = toupper(c);
-    switch (c) {
-        case 'B': case 'F': case 'P': case 'V': return '1';
-        case 'C': case 'G': case 'J': case 'K': case 'Q': case 'S': case 'X': case 'Z': return '2';
-        case 'D': case 'T': return '3';
-        case 'L': return '4';
-        case 'M': case 'N': return '5';
-        case 'R': return '6';
-        default: return '0'; // For A, E, I, O, U, H, W, Y
+    static const char *codes = "01230120022455012623010202";
+    return isalpha(c) ? codes[toupper(c) - 'A'] : '0';
+}
+
+// Function to initialize the Soundex string with the first character
+void initializeSoundex(const char *name, char *soundex) {
+    soundex[0] = toupper(name[0]);
+    soundex[1] = '\0';
+}
+
+// Function to append the Soundex code to the Soundex string if valid
+void appendSoundexCode(char *soundex, int *sIndex, char code) {
+    if (*sIndex < 4) {
+        soundex[*sIndex] = code;
+        (*sIndex)++;
+        soundex[*sIndex] = '\0';
     }
 }
 
-void generateSoundex(const char *name, char *soundex) {
-    int len = strlen(name);
-    soundex[0] = toupper(name[0]);
-    int sIndex = 1;
-
-    for (int i = 1; i < len && sIndex < 4; i++) {
-        char code = getSoundexCode(name[i]);
-        if (code != '0' && code != soundex[sIndex - 1]) {
-            soundex[sIndex++] = code;
-        }
-    }
-
+// Function to fill the remaining positions of the Soundex string with '0'
+void fillSoundex(char *soundex, int sIndex) {
     while (sIndex < 4) {
         soundex[sIndex++] = '0';
     }
-
     soundex[4] = '\0';
+}
+
+// Function to process each character of the name
+void processCharacter(char *soundex, int *sIndex, char code, char *prevCode) {
+    if (code != '0' && code != *prevCode) {
+        appendSoundexCode(soundex, sIndex, code);
+        *prevCode = code;
+    }
+}
+
+// Function to iterate through the name
+void iterateName(const char *name, char *soundex, int *sIndex) {
+    char prevCode = getSoundexCode(name[0]);
+    for (int i = 1; name[i] != '\0' && *sIndex < 4; i++) {
+        char code = getSoundexCode(name[i]);
+        processCharacter(soundex, sIndex, code, &prevCode);
+    }
+}
+
+// Main function to generate the Soundex string
+void generateSoundex(const char *name, char *soundex) {
+    if (!name || name[0] == '\0') {
+        soundex[0] = '\0';
+        return;
+    }
+
+    initializeSoundex(name, soundex);
+    int sIndex = 1;
+    iterateName(name, soundex, &sIndex);
+    fillSoundex(soundex, sIndex);
 }
 
 #endif // SOUNDEX_H
