@@ -33,15 +33,20 @@ void fillSoundex(char *soundex, int sIndex) {
     soundex[4] = '\0';
 }
 
-// Function to process the name and append appropriate Soundex codes
-void processName(const char *name, char *soundex, int *sIndex) {
+// Function to process each character of the name
+void processCharacter(char *soundex, int *sIndex, char code, char *prevCode) {
+    if (code != '0' && code != *prevCode) {
+        appendSoundexCode(soundex, sIndex, code);
+        *prevCode = code;
+    }
+}
+
+// Function to iterate through the name
+void iterateName(const char *name, char *soundex, int *sIndex) {
     char prevCode = getSoundexCode(name[0]);
     for (int i = 1; name[i] != '\0' && *sIndex < 4; i++) {
         char code = getSoundexCode(name[i]);
-        if (code != '0' && code != prevCode) {
-            appendSoundexCode(soundex, sIndex, code);
-            prevCode = code;
-        }
+        processCharacter(soundex, sIndex, code, &prevCode);
     }
 }
 
@@ -54,7 +59,7 @@ void generateSoundex(const char *name, char *soundex) {
 
     initializeSoundex(name, soundex);
     int sIndex = 1;
-    processName(name, soundex, &sIndex);
+    iterateName(name, soundex, &sIndex);
     fillSoundex(soundex, sIndex);
 }
 
