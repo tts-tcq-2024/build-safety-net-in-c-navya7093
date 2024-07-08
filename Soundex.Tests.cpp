@@ -13,3 +13,9 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
   generateSoundex("CABBg2%", soundex);
   ASSERT_STREQ(soundex,"C120");
 }
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
+ //AAA
+  char soundex[5];
+  generateSoundex("BABBg2@", soundex);
+  ASSERT_STREQ(soundex,"B120");
+}
