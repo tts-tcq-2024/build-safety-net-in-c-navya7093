@@ -23,7 +23,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
  //AAA
   char soundex[5];
   generateSoundex("", soundex);
- // ASSERT_STREQ(soundex,"0000");
+ // ASSERT_STREQ(soundex,"");
 }
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
  //AAA
@@ -42,4 +42,10 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
   char soundex[5];
   generateSoundex("123123", soundex);
  // ASSERT_STREQ(soundex,"0000");
+}
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_8) {
+ //AAA
+  char soundex[5];
+  generateSoundex("H3ll0W0rld", soundex);
+ // ASSERT_STREQ(soundex,"H400");
 }
