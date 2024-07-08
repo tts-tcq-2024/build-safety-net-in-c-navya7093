@@ -25,3 +25,15 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
   generateSoundex("", soundex);
  // ASSERT_STREQ(soundex,"0000");
 }
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
+ //AAA
+  char soundex[5];
+  generateSoundex("ABFP", soundex);
+ // ASSERT_STREQ(soundex,"A100");
+}
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_6) {
+ //AAA
+  char soundex[5];
+  generateSoundex("OCjjnrr", soundex);
+ // ASSERT_STREQ(soundex,"O256");
+}
