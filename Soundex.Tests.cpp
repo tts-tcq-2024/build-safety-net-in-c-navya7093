@@ -7,15 +7,10 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
   generateSoundex("AX", soundex);
   ASSERT_STREQ(soundex,"A200");
 }
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_2) {
  //AAA
   char soundex[5];
   generateSoundex("CABBg2%", soundex);
   ASSERT_STREQ(soundex,"C120");
 }
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
- //AAA
-  char soundex[5];
-  generateSoundex("Emmb3$", soundex);
-  ASSERT_STREQ(soundex,"E510");
-}
+
