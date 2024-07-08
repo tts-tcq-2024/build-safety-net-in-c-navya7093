@@ -10,7 +10,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_2) {
  //AAA
   char soundex[5];
-  generateSoundex("CABBg2%", soundex);
+  generateSoundex("CA^BBg2", soundex);
   ASSERT_STREQ(soundex,"C120");
 }
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
@@ -19,3 +19,4 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
   generateSoundex("Emmb3$", soundex);
   ASSERT_STREQ(soundex,"E510");
 }
+
